@@ -1,33 +1,49 @@
 <h1>Julian Industries</h1>
 
-<h3>Here is the list of divisions:</h3>
-<ul>
-  <% if @division_list.any?() %>
-    <% @division_list.each() do |division_object| %>
-      <li><%= division_object.name() %></li>
-    <% end %>
-  <% end %>
-</ul>
+<br >
 
-<h3>Here is the list of employees:</h3>
-<ul>
-  <% if @employee_list.any?() %>
-    <% @employee_list.each() do |employee_object| %>
-      <li><%= employee_object.name() %></li>
-    <% end %>
-  <% end %>
-</ul>
+<hr noshade>
 
 <h4>Add a new division</h4>
 <form action='/division_post' method='post'>
   <label for='division_name'>Division name:</label>
   <input id='division_name' name='division_name' type='text' placeholder='Accounting'>
-  <button type='submit' class='btn btn-primary'>Add Division</button>
+  <button type='submit' class='btn btn-info'>Add Division</button>
 </form>
+
+<h3>Here is the list of divisions:</h3>
+
+<ul>
+  <% if @division_list.any?() %>
+    <% @division_list.each() do |division_object| %>
+      <li><%= division_object.name() %></li>
+      <ul>
+        <% if division_object.employees().any?() %>
+          <% division_object.employees().each() do |employee| %>
+          <li><%= employee.name() %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+  <% else %>
+    <%= "There are no divisions yet" %>
+  <% end %>
+</ul>
+
+<br >
+<br >
+
+<hr noshade>
 
 <h4>Add a new employee</h4>
 <form action='/employee_post' method='post'>
   <label for='employee_name'>Employee name:</label>
   <input id='employee_name' name='employee_name' type='text' placeholder='Marge Simpson'>
-  <button type='submit' class='btn btn-primary'>Add Employee</button>
+  <label for='division_id'>Division:</label>
+    <select id='division_id' name='division_id' type='text'>
+      <% @division_list.each() do |division| %>
+      <option value="<%= division.id()%>"> <%= division.name() %> </option>
+      <% end %>
+    </select>
+  <button type='submit' class='btn btn-success'>Add Employee</button>
 </form>

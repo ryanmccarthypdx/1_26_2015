@@ -1,0 +1,21 @@
+h1 {
+  font-family: Helvetica;
+  color: #D6E7ED;
+  background-color: #3389A5;
+  border: 3px solid #FF6600;
+  padding: 10px 5px 15px 20px;
+}
+
+h3 {
+  font-family: Times, Helvetica;
+  color: #FF6600;
+}
+
+h4 {
+  font-family: Helvetica;
+  color: #5E6868;
+}
+
+li {
+  font-family: Courier;
+}
