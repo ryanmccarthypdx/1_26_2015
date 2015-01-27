@@ -4,13 +4,6 @@
 
 <hr noshade>
 
-<h4>Add a new division</h4>
-<form action='/division_post' method='post'>
-  <label for='division_name'>Division name:</label>
-  <input id='division_name' name='division_name' type='text' placeholder='Accounting'>
-  <button type='submit' class='btn btn-info'>Add Division</button>
-</form>
-
 <h3>Here is the list of divisions:</h3>
 
 <ul>
@@ -33,6 +26,25 @@
 <br >
 <br >
 
+<h4>Add a new division</h4>
+<form action='/division_post' method='post'>
+  <label for='division_name'>Division name:</label>
+  <input id='division_name' name='division_name' type='text' placeholder='Accounting'>
+  <button type='submit' class='btn btn-info'>Add Division</button>
+</form>
+
+<form action='/division_fire' method='post'>
+<input name="_method" type="hidden" value="delete">
+  <label for='fired_division'>Layoff an entire division:</label>
+    <select id='fired_division' name='fired_division' type='text' selected='selected'>
+      <option selected='selected'>Choose the poor bastards</option>
+      <% @division_list.each() do |division| %>
+      <option value="<%= division.id() %>"> <%= division.name() %> </option>
+      <% end %>
+    </select>
+  <button type='submit' class='btn btn-danger'>Ruin Everyone</button>
+</form>
+
 <hr noshade>
 
 <h4>Add a new employee</h4>
@@ -47,3 +59,21 @@
     </select>
   <button type='submit' class='btn btn-success'>Add Employee</button>
 </form>
+
+<form action='/employee_fire' method='post'>
+<input name="_method" type="hidden" value="delete">
+  <label for='fired_employee'>Employee name:</label>
+    <select id='fired_employee' name='fired_employee' type='text' selected='selected'>
+      <option selected='selected'>Choose the poor bastard</option>
+      <% @employee_list.each() do |employee| %>
+      <option value="<%= employee.id() %>"> <%= employee.name() %> </option>
+      <% end %>
+    </select>
+  <button type='submit' class='btn btn-danger'>Ruin Employee</button>
+</form>
+
+<ul>
+  <% @employee_list.each() do |employee| %>
+  <li><%= employee.name() %> </li>
+  <% end %>
+</ul>
